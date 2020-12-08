@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Threading.Tasks;
 
-namespace Phoenix_Leds
+namespace PhoenixLeds
 {
     class Program
     {
-        static void Main(string[] args)
-        {
+        private static async Task Main(string[] args) {
+            await GlobalSettings.Load();
+
             Console.WriteLine("Hello World!");
         }
     }

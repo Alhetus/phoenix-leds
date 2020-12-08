@@ -2,6 +2,14 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <RootNamespace>Phoenix_Leds</RootNamespace>
+        <RootNamespace>PhoenixLeds</RootNamespace>
     </PropertyGroup>
+    <ItemGroup>
+      <Folder Include="Animations" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="settings.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 </Project>
