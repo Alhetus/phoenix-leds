@@ -6,7 +6,11 @@ namespace PhoenixLeds
     class Program
     {
         private static async Task Main(string[] args) {
-            await GlobalSettings.Load();
+            // Load settings
+            await GlobalSettings.LoadAsync();
+
+            // Load animations from .anim files
+            await LedAnimationLoader.LoadAnimationsAsync();
 
             Console.WriteLine("Hello World!");
         }

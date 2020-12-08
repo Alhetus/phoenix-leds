@@ -12,8 +12,7 @@ namespace PhoenixLeds
         /// <summary>How many pixels exist in the led grid, for example in 12x12 grid this would be 12.</summary>
         public static int LedGridSize { get; private set; } = 12;
 
-        public static async Task Load()
-        {
+        public static async Task LoadAsync() {
             var settingsFilePath = Path.Combine(".", "settings.json");
 
             if (!File.Exists(settingsFilePath)) {

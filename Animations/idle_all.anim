@@ -1,0 +1,9 @@
+﻿{
+    "name": "idle",
+    "animationType": "Loop",
+    "rotateToFaceCenterPanel": false,
+    "animationFrameWidth": 12,
+    "animationFrameHeight": 12,
+    "animationTexturePath": "./Textures/idle.png",
+    "framesPerSecond": 6
+}
