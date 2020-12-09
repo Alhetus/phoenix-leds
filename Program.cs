@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace PhoenixLeds
 {
@@ -9,10 +8,14 @@ namespace PhoenixLeds
             // Load settings
             await GlobalSettings.LoadAsync();
 
+            // Open serial port
+            SerialCommunicator.InitSerialConnection();
+
             // Load animations from .anim files
             await LedAnimationLoader.LoadAnimationsAsync();
 
-            Console.WriteLine("Hello World!");
+            // Do not exit the application
+            while (true) { }
         }
     }
 }
