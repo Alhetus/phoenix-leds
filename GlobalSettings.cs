@@ -9,8 +9,8 @@ namespace PhoenixLeds
 {
     public static class GlobalSettings
     {
-        /// <summary>How many pixels exist in the led grid, for example in 12x12 grid this would be 12.</summary>
-        public static int LedGridSize { get; private set; } = 12;
+        public static int LedGridWidth { get; private set; } = 12;
+        public static int LedGridHeight { get; private set; } = 12;
         public static string SerialPort { get; private set; } = "";
         public static int BaudRate { get; private set; } = 12582912;
 
@@ -35,11 +35,17 @@ namespace PhoenixLeds
                 globalSettingsDto = JsonSerializer.Deserialize<GlobalSettingsDto>(json);
             }
             catch (JsonException e) {
-                Console.WriteLine($"Could not parse settings.json: {e.Message}");
+                Console.WriteLine($"Error: could not parse settings.json: {e.Message}");
                 return;
             }
 
-            LedGridSize = globalSettingsDto.LedGridSize;
+            if (string.IsNullOrWhiteSpace(globalSettingsDto.SerialPort)) {
+                Console.WriteLine("Error: 'serialPort' is not specified in settings.json!");
+                return;
+            }
+
+            LedGridWidth = globalSettingsDto.LedGridWidth;
+            LedGridHeight = globalSettingsDto.LedGridHeight;
             SerialPort = globalSettingsDto.SerialPort;
             BaudRate = globalSettingsDto.BaudRate;
 

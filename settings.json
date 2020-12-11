@@ -1,5 +1,6 @@
 ﻿{
-  "ledGridSize": 12,
+  "ledGridWidth": 12,
+  "ledGridHeight": 12,
   "serialPort": "COM3",
   "baudRate": 12582912
 }
