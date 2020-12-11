@@ -2,14 +2,22 @@
 {
     public class AnimationFrame
     {
-        public byte[] PixelBytes { get; set; }
+        public byte[] PixelBytes { get; }
+        public byte[]? PixelBytesRotated90 { get; }
+        public byte[]? PixelBytesRotated180 { get; }
+        public byte[]? PixelBytesRotated270 { get; }
 
-        public AnimationFrame(int frameWidth, int frameHeight)
+        public AnimationFrame(byte[] pixelBytes) {
+            PixelBytes = pixelBytes;
+        }
+
+        public AnimationFrame(byte[] pixelBytes, byte[] pixelBytesRotated90,
+            byte[] pixelBytesRotated180, byte[] pixelBytesRotated270)
         {
-            // Init the array with enough capacity to hold pixel data of one frame of animation. Use 24bit pixel values.
-            // For example 12x12 pixels 24bit each (RGB channels 8 bit each)
-            // 24 / 8 = 3 bytes
-            PixelBytes = new byte[frameWidth * frameHeight * 3];
+            PixelBytes = pixelBytes;
+            PixelBytesRotated90 = pixelBytesRotated90;
+            PixelBytesRotated180 = pixelBytesRotated180;
+            PixelBytesRotated270 = pixelBytesRotated270;
         }
     }
 }
