@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace PhoenixLeds
 {
@@ -12,7 +12,7 @@ namespace PhoenixLeds
             SerialCommunicator.InitSerialConnection();
 
             // Load animations from .anim files
-            await LedAnimationLoader.LoadAnimationsAsync();
+            await LedAnimationController.LoadAnimationsAsync();
 
             // Do not exit the application
             while (true) { }

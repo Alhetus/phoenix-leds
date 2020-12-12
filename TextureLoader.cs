@@ -71,6 +71,8 @@ namespace PhoenixLeds
                     }
                 }
 
+                Console.WriteLine($"Loaded texture '{texturePath}': {animationFrames.Count} animation frames.");
+
                 return animationFrames;
             }
             catch (Exception e) {

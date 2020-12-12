@@ -5,7 +5,7 @@ namespace PhoenixLeds.DTO
     public class LedAnimationDto
     {
         [JsonPropertyName("name")]
-        public string Name { get; set; } = "Unknown";
+        public string? Name { get; set; }
 
         [JsonPropertyName("animationType")]
         public AnimationType AnimationType { get; set; } = AnimationType.PlayOnce;
@@ -20,7 +20,7 @@ namespace PhoenixLeds.DTO
         public int AnimationFrameHeight { get; set; } = 12;
 
         [JsonPropertyName("animationTexturePath")]
-        public string? AnimationTexturePath { get; set; } = null;
+        public string? AnimationTexturePath { get; set; }
 
         [JsonPropertyName("framesPerSecond")]
         public int FramesPerSecond { get; set; } = 24;
