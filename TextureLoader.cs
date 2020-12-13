@@ -46,7 +46,8 @@ namespace PhoenixLeds
                         // Crop the image to the current frame and resize the cropped image to animation frame size
                         clone.Mutate(img => img
                             .Crop(cropRect)
-                            .Resize(animationFrameWidth, animationFrameHeight, KnownResamplers.Welch));
+                            .Resize(animationFrameWidth, animationFrameHeight, KnownResamplers.Welch)
+                            .Lightness(0.99f)); // Tone the lightness down just a bit so that we don't have any actual white pixels so we can use those to separate frame data
 
                         // Get raw bytes of pixel data of the generated image
                         var pixelBytes = GetImageBytes(clone);
