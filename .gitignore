@@ -5,3 +5,5 @@ obj/
 
 # IntelliJ IDEs
 .idea/
+
+*.DotSettings.user
