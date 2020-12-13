@@ -2,5 +2,6 @@
   "ledGridWidth": 12,
   "ledGridHeight": 12,
   "serialPort": "COM3",
-  "baudRate": 12582912
+  "baudRate": 12582912,
+  "ledUpdateFramesPerSecond": 120
 }

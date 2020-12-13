@@ -13,6 +13,7 @@ namespace PhoenixLeds
         public static int LedGridHeight { get; private set; } = 12;
         public static string SerialPort { get; private set; } = "";
         public static int BaudRate { get; private set; } = 12582912;
+        public static int LedUpdateFramesPerSecond { get; private set; } = 120;
 
         public static async Task LoadAsync() {
             var settingsFilePath = Path.Combine(".", "settings.json");
@@ -48,6 +49,7 @@ namespace PhoenixLeds
             LedGridHeight = globalSettingsDto.LedGridHeight;
             SerialPort = globalSettingsDto.SerialPort;
             BaudRate = globalSettingsDto.BaudRate;
+            LedUpdateFramesPerSecond = globalSettingsDto.LedUpdateFramesPerSecond;
 
             Console.WriteLine("Loaded settings.");
         }

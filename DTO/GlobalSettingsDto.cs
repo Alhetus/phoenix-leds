@@ -15,5 +15,8 @@ namespace PhoenixLeds.DTO
         
         [JsonPropertyName("baudRate")]
         public int BaudRate { get; set; }
+        
+        [JsonPropertyName("ledUpdateFramesPerSecond")]
+        public int LedUpdateFramesPerSecond { get; set; }
     }
 }
