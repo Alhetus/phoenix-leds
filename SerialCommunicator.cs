@@ -8,11 +8,16 @@ namespace PhoenixLeds
 {
     public static class SerialCommunicator
     {
-        private static SerialPort? SerialPort { get; set; }
+        private static SerialPort? Serial { get; set; }
 
-        // Message control bytes
+        // Message control bytes teensy -> computer
         private const byte STX = 0x02; // Start of Text
         private const byte ETX = 0x03; // End of Text
+
+        // Message control bytes computer -> teensy
+        // When textures are loaded they are slightly darkened so they don't contain any 255 (FF) values, those are reserved for communication
+        private static readonly byte[] FrameStartHeader = { 0xff }; // Send one FF byte to mark frame start
+        private static readonly byte[] FrameEndHeader = { 0xff, 0xff }; // Send two FF bytes to mark frame end
 
         private static readonly object EventLock = new object();
         private static byte[] _buffer = new byte[4096];
@@ -21,7 +26,7 @@ namespace PhoenixLeds
 
         public static void InitSerialConnection() {
             var ports = SerialPort.GetPortNames();
-            Console.WriteLine($"Found {ports.Length} serial ports.");
+            Console.WriteLine($"Found {ports.Length} serial " + (ports.Length == 1 ? "port." : "ports."));
 
             foreach (var port in ports) {
                 Console.WriteLine($"Found serial port: {port}");
@@ -33,29 +38,30 @@ namespace PhoenixLeds
             if (ports.All(x => x != GlobalSettings.SerialPort))
                 throw new Exception($"Error: Port '{GlobalSettings.SerialPort}' specified in settings.json not found!");
 
-            SerialPort = new SerialPort {
+            Serial = new SerialPort {
                 BaudRate = GlobalSettings.BaudRate,
                 DataBits = 8,
                 Parity = Parity.None,
                 StopBits = StopBits.One,
                 PortName = GlobalSettings.SerialPort,
                 RtsEnable = true,
-                Encoding = Encoding.UTF8
+                Encoding = Encoding.UTF8,
+                WriteBufferSize = 8192
             };
 
-            SerialPort.DataReceived += DataReceivedHandler;
-            SerialPort.ErrorReceived += ErrorReceivedHandler;
+            Serial.DataReceived += DataReceivedHandler;
+            Serial.ErrorReceived += ErrorReceivedHandler;
 
             try {
-                SerialPort.Open();
+                Serial.Open();
             }
             catch (Exception e) {
                 Console.WriteLine($"Error: Could not open serial port '{GlobalSettings.SerialPort}': " + e.Message);
                 throw;
             }
 
-            if (SerialPort.IsOpen)
-                Console.WriteLine($"Serial connection to port '{GlobalSettings.SerialPort}' is open. Baud rate: {SerialPort.BaudRate}");
+            if (Serial.IsOpen)
+                Console.WriteLine($"Serial connection to port '{GlobalSettings.SerialPort}' is open. Baud rate: {Serial.BaudRate}");
         }
 
         private static void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e) {
@@ -137,6 +143,18 @@ namespace PhoenixLeds
                         break;
                 }
             }
+        }
+
+        public static void WriteFullAnimationFrame(byte[] fullFrameBytes) {
+            if (Serial == null || !Serial.IsOpen) {
+                Console.WriteLine("Error: Can't send animation frame. Serial port is not open!");
+                return;
+            }
+
+            // Write full animation frame with all panels
+            Serial.Write(FrameStartHeader, 0, FrameStartHeader.Length);
+            Serial.Write(fullFrameBytes, 0, fullFrameBytes.Length);
+            Serial.Write(FrameEndHeader, 0, FrameEndHeader.Length);
         }
     }
 }
