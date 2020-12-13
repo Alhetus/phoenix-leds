@@ -10,15 +10,18 @@ using PhoenixLeds.DTO;
 
 namespace PhoenixLeds
 {
-    public static class LedAnimationController
+    public class LedAnimationController
     {
-        private static List<LedAnimation> LedAnimations { get; set; } = new List<LedAnimation>();
-        private static List<Panel> PlayingAnimations { get; set; } = new List<Panel>();
+        private readonly LedAnimationModel _ledAnimationModel;
+
+        public LedAnimationController() {
+            _ledAnimationModel = new LedAnimationModel(GlobalSettings.LedUpdateFramesPerSecond);
+        }
 
         /// <summary>
         /// Load animations from .anim files in Animations directory
         /// </summary>
-        public static async Task LoadAnimationsAsync() {
+        public async Task LoadAnimationsAsync() {
             var animationsPath = Path.Combine(".", "Animations");
 
             if (!Directory.Exists(animationsPath)) {
@@ -56,7 +59,7 @@ namespace PhoenixLeds
 
             Console.WriteLine($"Loaded {ledAnimations.Count} valid animations.");
 
-            LedAnimations = ledAnimations;
+            _ledAnimationModel.SetLedAnimations(ledAnimations);
         }
 
         private static async Task<LedAnimationDto?> LoadAnimationAsync(string path) {
@@ -115,17 +118,32 @@ namespace PhoenixLeds
         /// </summary>
         /// <param name="animationName">The name of the animation to play</param>
         /// <param name="panels">Which panels to play the animation on, can contain only unique values</param>
-        public static async Task PlayLedAnimationAsync(string animationName, HashSet<Panel> panels) {
+        public void PlayLedAnimation(string animationName, HashSet<Panel> panels) {
             if (!panels.Any()) {
-                Console.WriteLine($"No panels specified for the animation!");
+                Console.WriteLine("No panels specified for the animation!");
                 return;
             }
 
-            var animation = LedAnimations.SingleOrDefault(x => x.Name == animationName);
+            var animation = _ledAnimationModel.GetAnimationByName(animationName);
 
             if (animation == null) {
                 Console.WriteLine($"Animation with name '{animationName}' not found!");
                 return;
+            }
+
+            foreach (var panel in panels) {
+                // Stop any currently playing animations
+                if (_ledAnimationModel.IsAnimationPlayingOnPanel(panel)) {
+                    var playingAnimation = _ledAnimationModel.GetPlayingAnimation(panel);
+                    playingAnimation?.StopAnimation();
+                }
+
+                // Set as the currently playing animation on panel
+                var animationPlayer = new AnimationPlayer(_ledAnimationModel, animation, panel);
+                _ledAnimationModel.SetPlayingAnimation(panel, animationPlayer);
+
+                // Play the animation
+                animationPlayer.PlayAnimation();
             }
         }
 
@@ -134,8 +152,8 @@ namespace PhoenixLeds
         /// </summary>
         /// <param name="animationName">The name of the animation to play</param>
         /// <param name="panel">The panel to play the animation on</param>
-        public static async Task PlayLedAnimationAsync(string animationName, Panel panel) {
-            await PlayLedAnimationAsync(animationName, new HashSet<Panel> { panel });
+        public void PlayLedAnimation(string animationName, Panel panel) {
+            PlayLedAnimation(animationName, new HashSet<Panel> { panel });
         }
     }
 }
