@@ -1,16 +1,5 @@
 ﻿namespace PhoenixLeds
 {
-    public enum GlobalLightState
-    {
-        None, // All lights are off
-        Idle, // Running idle animation
-        SelectSong, // Running select song animation
-        GamePlayChart, // Animate the played chart with note colors
-        GamePlayJudgements, // Animate lights based on note judgements and their colors
-        ScoreResults, // Result screen animation
-        InputTesting // Testing input, animate input values
-    }
-
     public enum AnimationType
     {
         PlayOnce,
@@ -19,9 +8,9 @@
 
     public enum Panel
     {
-        Left,
-        Down,
-        Up,
-        Right
+        Left = 0,
+        Down = 1,
+        Up = 2,
+        Right = 3
     }
 }
