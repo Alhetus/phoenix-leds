@@ -1,0 +1,9 @@
+﻿{
+    "name": "arrow",
+    "animationType": "Loop",
+    "rotateToFaceCenterPanel": true,
+    "animationFrameWidth": 12,
+    "animationFrameHeight": 12,
+    "animationTexturePath": "./Textures/arrow1.png",
+    "framesPerSecond": 20
+}
