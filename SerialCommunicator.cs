@@ -15,9 +15,9 @@ namespace PhoenixLeds
         private const byte ETX = 0x03; // End of Text
 
         // Message control bytes computer -> teensy
-        // When textures are loaded they are slightly darkened so they don't contain any 255 (FF) values, those are reserved for communication
-        private static readonly byte[] FrameStartHeader = { 0xff }; // Send one FF byte to mark frame start
-        private static readonly byte[] FrameEndHeader = { 0xff, 0xff }; // Send two FF bytes to mark frame end
+        // When textures are loaded they are slightly darkened so they don't contain any 254 (FE) or 255 (FF) values, those are reserved for communication
+        private static readonly byte[] FrameStartHeader = { 0xfe }; // Send one FE byte to mark frame start
+        private static readonly byte[] FrameEndHeader = { 0xff }; // Send one FF byte to mark frame end
 
         private static readonly object EventLock = new object();
         private static byte[] _buffer = new byte[4096];

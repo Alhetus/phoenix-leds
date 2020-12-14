@@ -64,26 +64,19 @@ void loop() {
     
     byte b = Serial.read();
     
-    // Received control byte -> either start or end of frame
-    if (b == 0xff) {
-      byte b2 = Serial.read();
+    // Received start of frame control byte
+    if (b == 0xfe) {
+      // Start accumulating bytes to frame buffer
+      frameByteIndex = 0;
+    }
+    // Received end of frame control byte
+    else if (b == 0xff) {
+      // Show frame pixels
+      for (int i = 0; i < leds.numPixels(); i++) {
+        leds.setPixel(i, frameBuffer[i*3], frameBuffer[i*3 + 1], frameBuffer[i*3 + 2]);
+      }
       
-      // End of frame
-      if (b2 == 0xff) {
-        // Show frame pixels
-        for (int i = 0; i < leds.numPixels(); i++) {
-          leds.setPixel(i, frameBuffer[i*3], frameBuffer[i*3 + 1], frameBuffer[i*3 + 2]);
-        }
-        
-        leds.show();
-      }
-      // Start of frame
-      else {
-        // Start accumulating bytes to frame buffer
-        frameByteIndex = 0;
-        frameBuffer[frameByteIndex] = b2;
-        frameByteIndex++;
-      }
+      leds.show();
     }
     // Received data byte
     else {
