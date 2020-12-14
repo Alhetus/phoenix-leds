@@ -4,6 +4,6 @@
     "rotateToFaceCenterPanel": false,
     "animationFrameWidth": 12,
     "animationFrameHeight": 12,
-    "animationTexturePath": "./Textures/idle.png",
-    "framesPerSecond": 6
+    "animationTexturePath": "./Textures/idle2.png",
+    "framesPerSecond": 120
 }
