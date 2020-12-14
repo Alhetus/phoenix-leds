@@ -57,7 +57,7 @@ void setup() {
 
 void loop() {
   while (Serial.available()) {
-    // Protect agains overflows, just write the last byte again
+    // Protect against overflows, just write the last byte again
     if (frameByteIndex >= sizeof(frameBuffer) - 1) {
       frameByteIndex -= 1;
     }
@@ -85,7 +85,7 @@ void loop() {
         frameByteIndex++;
       }
     }
-    // Recevied data byte
+    // Received data byte
     else {
       frameBuffer[frameByteIndex] = b;
       frameByteIndex++;
