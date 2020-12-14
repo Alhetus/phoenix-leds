@@ -47,6 +47,8 @@ namespace PhoenixLeds
                 _ledAnimationModel.SetPanelAnimationFrameBytes(_panel, _animation.RotateToFaceCenterPanel ? 
                         currentFrame.GetBytesByPanel(_panel) : currentFrame.PixelBytes);
 
+                frameIndex++;
+
                 // Wait as much as the frame rate of the animation requires
                 try {
                     await Task.Delay(updateRateMilliseconds, _token);
