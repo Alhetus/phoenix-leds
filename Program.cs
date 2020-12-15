@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace PhoenixLeds
 {
@@ -18,9 +18,14 @@ namespace PhoenixLeds
             var ledAnimationController = new LedAnimationController();
             await ledAnimationController.LoadAnimationsAsync();
 
-            // Do not exit the application
+            // Start server
+            var server = new Server(ledAnimationController);
+            // TODO: Move server configuration to settings.json
+            server.StartServer(6263, 20);
+
+            // Poll for received animation events on the ENet server
             while (true) {
-                await Task.Delay(100000);
+                server.Update();
             }
         }
     }

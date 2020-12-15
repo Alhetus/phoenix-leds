@@ -21,6 +21,7 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
+      <PackageReference Include="ENet-CSharp" Version="2.4.5" />
       <PackageReference Include="SixLabors.ImageSharp" Version="1.0.2" />
       <PackageReference Include="System.IO.Ports" Version="5.0.0" />
     </ItemGroup>
