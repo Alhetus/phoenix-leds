@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace PhoenixLeds
 {
@@ -7,6 +7,9 @@ namespace PhoenixLeds
         private static async Task Main(string[] args) {
             // Load settings
             await GlobalSettings.LoadAsync();
+
+            // Load animation events
+            await AnimationEventModel.LoadAsync();
 
             // Open serial port
             SerialCommunicator.InitSerialConnection();

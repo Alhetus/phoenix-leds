@@ -1,0 +1,9 @@
+﻿{
+  "animationEvents": [
+    {
+      "eventName": "foo",
+      "panels": ["Left", "Down", "Up", "Right"],
+      "animationToPlay": "arrow"
+    }
+  ]
+}
