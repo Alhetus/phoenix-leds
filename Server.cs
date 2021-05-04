@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ENet;
@@ -17,18 +18,23 @@ namespace PhoenixLeds
 
         public void StartServer(ushort port, int maxClients) {
             Library.Initialize();
+
             _server = new Host();
             var address = new Address { Port = port };
+            var success = address.SetHost("localhost");
 
-            _server.Create(address, maxClients);
+            if (!success)
+                throw new Exception("Could not set host to localhost!");
+
+            _server.Create(address, maxClients, 2);
             Console.WriteLine($"Server started on port {port}");
         }
 
         public void Update() {
             if (_server == null)
                 return;
-            
-            if (_server.Service(0, out var netEvent) <= 0)
+
+            if (_server.Service(1, out var netEvent) <= 0)
                 return;
 
             switch (netEvent.Type) {
@@ -68,9 +74,21 @@ namespace PhoenixLeds
             var message = Encoding.ASCII.GetString(buffer);
             var animationEventDto = new AnimationEventDto(message);
 
+            if (animationEventDto.PadIndex > 0) {
+                Console.WriteLine("TODO: support more pads!");
+                return;
+            }
+
             if (AnimationEventModel.AnimationEvents.ContainsKey(animationEventDto.EventName)) {
                 var animationEvent = AnimationEventModel.AnimationEvents[animationEventDto.EventName];
-                _ledAnimationController.PlayLedAnimation(animationEvent.AnimationToPlay, animationEvent.Panels.ToHashSet());
+
+                // If column that we got from animationEventDto is supported play animation on that panel
+                // Otherwise 
+                var panelsToPlayOn = animationEventDto.ColumnIndex >= 0 && animationEventDto.ColumnIndex <= 3
+                    ? new List<Panel> { (Panel) animationEventDto.ColumnIndex }
+                    : animationEvent.Panels;
+
+                _ledAnimationController.PlayLedAnimation(animationEvent.AnimationToPlay, panelsToPlayOn.ToHashSet());
             }
             else
                 Console.WriteLine($"Error: No animation event with name '{animationEventDto.EventName}' exists!");
