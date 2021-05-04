@@ -32,7 +32,9 @@ namespace PhoenixLeds.DTO
             else
                 Console.WriteLine($"Could not parse columnIndex from message part '{parts[1]}'");
 
-            EventName = parts[2].Trim();
+            var eventName = parts[2];
+            eventName = eventName.Remove(eventName.Length - 1); // Extra char submitted with ENet packet
+            EventName = eventName;
         }
     }
 }
