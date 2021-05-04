@@ -1,0 +1,9 @@
+﻿{
+    "name": "stepchart4th",
+    "animationType": "PlayOnce",
+    "rotateToFaceCenterPanel": true,
+    "animationFrameWidth": 12,
+    "animationFrameHeight": 12,
+    "animationTexturePath": "./Textures/stepchart_arrow_4th.png",
+    "framesPerSecond": 180
+}

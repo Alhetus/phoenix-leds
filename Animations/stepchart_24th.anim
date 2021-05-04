@@ -1,0 +1,9 @@
+﻿{
+    "name": "stepchart24th",
+    "animationType": "PlayOnce",
+    "rotateToFaceCenterPanel": true,
+    "animationFrameWidth": 12,
+    "animationFrameHeight": 12,
+    "animationTexturePath": "./Textures/stepchart_arrow_24th.png",
+    "framesPerSecond": 180
+}

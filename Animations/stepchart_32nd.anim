@@ -1,0 +1,9 @@
+﻿{
+    "name": "stepchart32nd",
+    "animationType": "PlayOnce",
+    "rotateToFaceCenterPanel": true,
+    "animationFrameWidth": 12,
+    "animationFrameHeight": 12,
+    "animationTexturePath": "./Textures/stepchart_arrow_32nd.png",
+    "framesPerSecond": 180
+}

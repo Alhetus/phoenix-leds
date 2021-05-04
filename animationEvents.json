@@ -1,9 +1,104 @@
 ﻿{
   "animationEvents": [
     {
-      "eventName": "foo",
-      "panels": ["Left", "Down", "Up", "Right"],
-      "animationToPlay": "arrow"
+      "eventName": "Tap4th",
+      "panels": [],
+      "animationToPlay": "stepchart4th"
+    },
+    {
+      "eventName": "Tap8th",
+      "panels": [],
+      "animationToPlay": "stepchart8th"
+    },
+    {
+      "eventName": "Tap12th",
+      "panels": [],
+      "animationToPlay": "stepchart12th"
+    },
+    {
+      "eventName": "Tap16th",
+      "panels": [],
+      "animationToPlay": "stepchart16th"
+    },
+    {
+      "eventName": "Tap24th",
+      "panels": [],
+      "animationToPlay": "stepchart24th"
+    },
+    {
+      "eventName": "Tap32nd",
+      "panels": [],
+      "animationToPlay": "stepchart32nd"
+    },
+    {
+      "eventName": "Tap48th",
+      "panels": [],
+      "animationToPlay": "stepchart48th"
+    },
+    {
+      "eventName": "Tap64th",
+      "panels": [],
+      "animationToPlay": "stepchart64th"
+    },
+    {
+      "eventName": "Tap192nd",
+      "panels": [],
+      "animationToPlay": "stepchart192nd"
+    },
+    {
+      "eventName": "HoldHead4th",
+      "panels": [],
+      "animationToPlay": "stepchart4th"
+    },
+    {
+      "eventName": "HoldHead8th",
+      "panels": [],
+      "animationToPlay": "stepchart8th"
+    },
+    {
+      "eventName": "HoldHead12th",
+      "panels": [],
+      "animationToPlay": "stepchart12th"
+    },
+    {
+      "eventName": "HoldHead16th",
+      "panels": [],
+      "animationToPlay": "stepchart16th"
+    },
+    {
+      "eventName": "HoldHead24th",
+      "panels": [],
+      "animationToPlay": "stepchart24th"
+    },
+    {
+      "eventName": "HoldHead32nd",
+      "panels": [],
+      "animationToPlay": "stepchart32nd"
+    },
+    {
+      "eventName": "HoldHead48th",
+      "panels": [],
+      "animationToPlay": "stepchart48th"
+    },
+    {
+      "eventName": "HoldHead64th",
+      "panels": [],
+      "animationToPlay": "stepchart64th"
+    },
+    {
+      "eventName": "HoldHead192nd",
+      "panels": [],
+      "animationToPlay": "stepchart192nd"
+    },
+    {
+      "eventName": "Mine",
+      "panels": [],
+      "animationToPlay": "stepchartMine"
+    },
+    {
+      "eventName": "Lift",
+      "panels": [],
+      "animationToPlay": "stepchartMine"
     }
   ]
 }

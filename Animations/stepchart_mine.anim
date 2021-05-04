@@ -1,0 +1,9 @@
+﻿{
+    "name": "stepchartMine",
+    "animationType": "PlayOnce",
+    "rotateToFaceCenterPanel": false,
+    "animationFrameWidth": 12,
+    "animationFrameHeight": 12,
+    "animationTexturePath": "./Textures/stepchart_mine.png",
+    "framesPerSecond": 180
+}
